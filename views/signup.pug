@@ -1,0 +1,22 @@
+extends ./layout.pug
+
+block contenido
+	div(class="col-md-6 remove-float mx-auto big-top-space")
+		form(action="/users", method="POST")
+			div.form-group
+				label(for="email") Email
+				input(type="text", name="email", placeholder="Email", id="email").form-control
+			div.form-group
+				label(for="password") Contraseña
+				input(type="password", name="password", placeholder="contraseña", id="password").form-control
+			div.form-group
+				label(for="password") Confirma contraseña
+				input(type="password", name="password_confirmation", placeholder="Confirma contraseña", id="password").form-control
+			div.form-group
+				label(for="username") Username
+				input(type="username", name="username", placeholder="username", id="username").form-control
+			div.row.top-space
+				div.col-xs-12.col-sm-6
+					button(type="submit", class="btn btn-primary") Iniciar Sesion
+				div.col-xs-12.col-sm-6.text-right
+					a(href="/login") Ya tengo un cuenta

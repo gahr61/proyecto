@@ -1,0 +1,9 @@
+extends ../layout.pug
+
+block contenido
+	//para obtener variables desde el controlador app.js
+	//hacemos una interpolacion con #{variableLocals} la cual contiene la informacion
+	//que necesitamos, en este caso user
+	p Hola #{user.email}
+
+	a(href="/app/imagenes/new") Registrar imagen

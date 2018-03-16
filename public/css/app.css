@@ -1,0 +1,58 @@
+.right-space {
+	margin-right: 1em;
+}
+
+.remove-float{
+	float: none;
+}
+
+.top-space{
+	margin-top: 1.5em;
+}
+
+.big-top-space{
+	margin-top: 100px;
+}
+
+.large-padding{
+	padding: 10px 15px;
+}
+.black{
+	background: #222;
+}
+.white-text{
+	color: white;
+}
+nav{
+	text-align: right;
+}
+nav li{
+	display: inline-block;
+	margin-right: 1em;
+	font-size: 1.1em;
+}
+nav li a{
+	color: white;
+}
+nav li a:hover{
+	color: white;
+}
+.white{
+	background-color: white;
+}
+.border{
+	border: solid 1px #eee;
+}
+/*nth-of-type sirve para colorear una fila dependiendo si es par o impar*/
+.tr:nth-of-type(odd){
+	background-color: #eee;
+}
+form.link{
+	display: inline-block;
+}
+form.link input[type="submit"]{
+	background: transparent;
+	border: none;
+	color: red;
+	cursor: pointer;
+}

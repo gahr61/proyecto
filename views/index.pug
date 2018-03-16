@@ -1,0 +1,12 @@
+extends ./layout.pug
+
+block contenido
+
+	//para utilizar el layout en cualquier pagina y solo cargar el contenido utilizamos
+	//exprends y la ruta del layout, siempre debe de estar al iniciar el documento
+	//despues colocamos el block en el cual deseamos cargar el contenido 
+	//se carga el layout y el h1 juntos 
+	div(class="col-md-8 remove-float mx-auto text-center big-top-space")
+		h1 Bienvenidos
+		a(href="/login" class="right-space") Iniciar sesion
+		a(href="/signup") Registro

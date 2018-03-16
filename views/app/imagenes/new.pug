@@ -1,0 +1,15 @@
+extends ../../layout.pug
+
+block contenido
+	div(class="col-md-6 remove-float mx-auto big-top-space")
+		h1 Registro de imagen
+		form(action="/app/imagenes", method="POST")
+			div.form-group
+				label(for="title") Titulo
+				input(type="text", name="title", placeholder="Titulo de la imagen", id="title").form-control
+			div.form-group
+				label(for="archivo") Imagen
+				input(type="file", name="archivo", id="archivo").form-control
+			div.row.top-space
+				div.col-xs-12.col-sm-6
+					button(type="submit", class="btn btn-primary") Guardar
