@@ -5,11 +5,18 @@ html(lang="es")
 		meta(charset="utf-8")
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css", rel="stylesheet")
 		link(href="/public/css/app.css", rel="stylesheet", type="text/css")
+		//se necesita la libreria de /socket.io/socket.io.js para que exista comunicacion entre
+		//la interfaz(cliente) y el servidor
+		script(src="/socket.io/socket.io.js")
+		script(src="/public/js/handlebars-v4.0.11.js")
+
 	body
 		nav.large-padding.black.white-text
 			ul
 				li
 					a(href="/app" class="right-space") Inicio
+				li
+					a(href="/app/imagenes/new") Registrar imagen
 				li
 					a(href="/app/imagenes") Mis imagenes
 		//para sustituir contenido se utiliza block y la etiqueta de lo que se sustituye

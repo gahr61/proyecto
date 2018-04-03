@@ -75,7 +75,6 @@ user_schema.virtual("password_confirmation").get(()=>{
 	this.p_c = password;
 });
 
-
 //creamos un modelo el cual establece la conexion con la base de datos
 var User = mongoose.model("User", user_schema); //mongoose.model("nombre modelo", schema)
 

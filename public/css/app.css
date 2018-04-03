@@ -56,3 +56,26 @@ form.link input[type="submit"]{
 	color: red;
 	cursor: pointer;
 }
+
+.img-container{
+	width: 700px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+.img-container h1, .img-container h1{
+	padding: 15px;
+	border-bottom: 1px solid #222;
+}
+
+.img-container p{
+	text-align: right;
+	font-size: 1.2em;
+	margin-top: 1em;
+}
+
+img{
+	max-width: 100%;
+}
+main-img{
+
+}

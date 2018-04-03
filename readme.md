@@ -4,7 +4,6 @@
  	- Registrarte al sistema
  	- Iniciar sesion
  	- Crear un nuevo registro
- 	- Editar un registro
  	- Eliminar un registro
  	- Mostrar los registros
  	- Cargar imagenes

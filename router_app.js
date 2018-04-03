@@ -8,13 +8,27 @@ var Imagen = require("./models/imagenes");
 var router = express.Router();
 
 
+var fs = require("fs") // permite mover archivos
+
+
+//creamos un cliente
+var redis = require("redis");
+var client = redis.createClient();
+
 //implementamos el middlewware
 var image_finder_middleware = require("./middlewares/find_image");
 
 
 router.get("/", (req, res)=>{
-	//se busca al usuario una vez que se logea
-	res.render("app/home");
+	//mostramos las imagenes
+	Imagen.find({})
+			.populate("creator")
+			.exec(function(err, imagenes){
+				if(err) console.log(err);
+				//se busca al usuario una vez que se logea
+				res.render("app/home", {imagenes: imagenes});
+			})
+				
 });
 
 /*
@@ -51,7 +65,7 @@ router.route("/imagenes/:id") //esto quiere decir que vamos a enviar un id a la 
 		res.render("app/imagenes/show");
 	})						
 	.put((req,res)=>{ //actualiza registros
-		res.locals.imagen.title = req.body.title;
+		res.locals.imagen.title = req.fields.title;
 		res.locals.imagen.save(function(err){
 			if(err){
 				res.render(err);
@@ -75,9 +89,10 @@ router.route("/imagenes/:id") //esto quiere decir que vamos a enviar un id a la 
 //coleccion de imagenes
 router.route("/imagenes")
 	.get((req,res)=>{
-		//para obtener todas las imagenes se utiliza el comando find sin campos
-		//find({})
-		Imagen.find({}, function(err, imagenes){
+		//para obtener las imagenes del usuario que esta logeado
+		//find({creator:res.locals.user._id})
+		//find({}) queda asi gracias a los permisos de la imagen
+		Imagen.find({creator:res.locals.user._id}, function(err, imagenes){
 			//si existe un error redirigir a el inicio /app
 			if(err){ 
 				res.redirect("/app");
@@ -90,14 +105,36 @@ router.route("/imagenes")
 	})						
 	.post((req,res)=>{
 		//guardamos la imagen en la base de datos
+		var extension = req.files.archivo.name.split(".").pop()//guarda la extension del archivo
+
 		var data = { //extraemos la informacion del formulario
-			title : req.body.title
+			title : req.fields.title,
+			//agregamos el creador de cada registro
+			creator: res.locals.user._id, // viene de middleware session
+			extension: extension
 		}
 		//creamos una instancia del modelo imagen
 		var imagen = new Imagen(data);
 		
 		imagen.save(function(err){
 			if(!err){
+
+				var img_json = {
+					"id" : imagen._id,
+					"title" : imagen.title,
+					"extension": imagen.extension
+				};
+
+
+				//publicamos el cliente publiss(canal, informacion)
+				client.publish("images", JSON.stringify(img_json));
+				//renombra un archivo
+				//fs.rename()
+				old = req.files.archivo.path;
+				nuevo = "public/images/"+imagen._id+"."+extension;
+				fs.rename(old, nuevo, (err)=>{
+					if (err) throw err;
+				});
 				res.redirect("/app/imagenes/"+imagen._id);
 			}else{
 				res.render(err);
